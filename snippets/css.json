@@ -1,0 +1,7 @@
+{
+  "Media Query": {
+    "prefix": "@min",
+    "body": ["@media (min-width:$1px){$2}"],
+    "description": "Create Media Query"
+  }
+}
