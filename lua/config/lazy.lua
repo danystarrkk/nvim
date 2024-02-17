@@ -49,7 +49,6 @@ require("nvim_comment").setup()
 
 require("bufferline").setup({
   options = {
-    separator_style = "slant",
     offsets = {
       {
         filetype = "neo-tree",
