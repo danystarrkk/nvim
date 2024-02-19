@@ -5,7 +5,7 @@ return {
     lazy = false,
     opts = {
       style = "deep",
-      transparent = true,
+      transparent = false,
       term_colors = true,
       ending_tildes = false,
       cmp_itemkind_reverse = false,
