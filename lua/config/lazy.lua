@@ -26,7 +26,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
+  install = { colorscheme = { "onedark", "nordic" } },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {
@@ -46,16 +46,4 @@ require("lazy").setup({
 })
 
 require("nvim_comment").setup()
-
-require("bufferline").setup({
-  options = {
-    offsets = {
-      {
-        filetype = "neo-tree",
-        text = "Explorer",
-        text_align = "center",
-        separator = true,
-      },
-    },
-  },
-})
+require("nvim-treesitter").setup()
