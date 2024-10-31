@@ -10,7 +10,6 @@ return {
         indicator = {
           style = "underline",
         },
-        separator_style = "slope",
         offsets = {
           {
             filetype = "neo-tree",

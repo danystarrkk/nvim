@@ -5,7 +5,7 @@ return {
     lazy = false,
     opts = {
       style = "deep",
-      transparent = false,
+      transparent = true,
       term_colors = true,
     },
   },
