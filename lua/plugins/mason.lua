@@ -1,32 +1,31 @@
 return {
-  {
-    "mason-org/mason.nvim",
-    opts = {
-      ensure_installed = {
-        -- Desarrollo Web
-        "html-lsp",
-        "css-lsp",
-        "emmet-ls",
-        "tailwindcss-language-server",
-        "vtsls",
-        "eslint_d",
-        "intelephense",
-
-        -- Python y Docker
-        "pyright",
-        "black",
-        "dockerfile-language-server",
-        "docker-compose-language-service",
-
-        -- Terminal y Scripts
-        "bash-language-server",
-        "shellcheck",
-
-        -- Markdown
-        "marksman",
-        "markdownlint",
-        "prettier",
-      },
+  "williamboman/mason.nvim",
+  opts = {
+    ensure_installed = {
+      "lua-language-server",
+      "stylua",
+      "html-lsp",
+      "css-lsp",
+      "prettier",
+      "ts_ls",
+      "intelephense",
+      "clangd",
+      "dockerls",
+      "jsonls",
+      "marksman",
+      "pyright",
+      "black",
+      "isort",
+      "tailwindcss-language-server",
+      "taplo",
+      "bash-language-server",
+      "shellcheck",
+      "shfmt",
+      "gopls",
+      "gofumpt",
+      "goimports",
+      "eslint_d",
+      "phpstan",
     },
   },
 }
