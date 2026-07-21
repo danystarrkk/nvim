@@ -69,29 +69,29 @@ install_system_deps() {
 
   case "$distro" in
   arch | manjaro | endeavouros | artix)
-    # Se agrega git, python, go, php y composer requeridos por Mason
-    sudo pacman -S --noconfirm git gcc make unzip curl ripgrep fd wl-clipboard python python-pip go php composer
+    # Se agrega git, python, go, php, composer, rust y clang/llvm requeridos por Mason y dependencias
+    sudo pacman -S --noconfirm git gcc make unzip curl ripgrep fd wl-clipboard python python-pip go php composer rust cargo clang llvm
     ;;
   debian | ubuntu | pop | linuxmint | elementary | zorin)
-    sudo apt update && sudo apt install -y git gcc make unzip curl ripgrep fd-find wl-clipboard python3 python3-pip python3-venv golang php-cli composer
+    sudo apt update && sudo apt install -y git gcc make unzip curl ripgrep fd-find wl-clipboard python3 python3-pip python3-venv golang php-cli composer cargo rustc clang llvm
     ;;
   fedora | rhel | centos)
-    sudo dnf install -y git gcc make unzip curl ripgrep fd-find wl-clipboard python3 python3-pip golang php-cli composer
+    sudo dnf install -y git gcc make unzip curl ripgrep fd-find wl-clipboard python3 python3-pip golang php-cli composer cargo rust clang llvm
     ;;
   opensuse* | suse)
-    sudo zypper install -y git gcc make unzip curl ripgrep fd wl-clipboard python3 python3-pip go php composer
+    sudo zypper install -y git gcc make unzip curl ripgrep fd wl-clipboard python3 python3-pip go php composer rust cargo clang llvm
     ;;
   alpine)
-    sudo apk add git gcc make unzip curl ripgrep fd wl-clipboard python3 go php composer
+    sudo apk add git gcc make unzip curl ripgrep fd wl-clipboard python3 go php composer rust cargo clang llvm
     ;;
   void)
-    sudo xbps-install -S git gcc make unzip curl ripgrep fd wl-clipboard python3 go php composer
+    sudo xbps-install -S git gcc make unzip curl ripgrep fd wl-clipboard python3 go php composer rust cargo clang llvm
     ;;
   nixos)
-    nix-env -iA nixpkgs.git nixpkgs.gcc nixpkgs.gnumake nixpkgs.unzip nixpkgs.curl nixpkgs.ripgrep nixpkgs.fd nixpkgs.wl-clipboard nixpkgs.python3 nixpkgs.go nixpkgs.php nixpkgs.phpPackages.composer
+    nix-env -iA nixpkgs.git nixpkgs.gcc nixpkgs.gnumake nixpkgs.unzip nixpkgs.curl nixpkgs.ripgrep nixpkgs.fd nixpkgs.wl-clipboard nixpkgs.python3 nixpkgs.go nixpkgs.php nixpkgs.phpPackages.composer nixpkgs.cargo nixpkgs.rustc nixpkgs.clang nixpkgs.llvm
     ;;
   gentoo)
-    sudo emerge --ask=n dev-vcs/git sys-devel/gcc sys-devel/make app-arch/unzip net-misc/curl sys-apps/ripgrep sys-apps/fd gui-apps/wl-clipboard dev-lang/python dev-lang/go dev-lang/php dev-php/composer
+    sudo emerge --ask=n dev-vcs/git sys-devel/gcc sys-devel/make app-arch/unzip net-misc/curl sys-apps/ripgrep sys-apps/fd gui-apps/wl-clipboard dev-lang/python dev-lang/go dev-lang/php dev-php/composer dev-lang/rust sys-devel/clang sys-devel/llvm
     ;;
   *)
     echo "   Distro no reconocida ($distro). Instala manualmente dependencias."
@@ -174,7 +174,7 @@ setup_nvidia_api_key() {
   echo "  NVIDIA_API_KEY cargada en la sesión actual."
 }
 
-echo "  Iniciando configuración de Neovim..."
+echo "  Iniciando configuración de dependencias para Neovim..."
 
 install_system_deps
 
@@ -185,11 +185,25 @@ else
   install_npm
 fi
 
-echo "  Instalando dependencias globales de npm..."
-sudo npm install -g eslint live-server tree-sitter-cli typescript neovim
+echo "  Instalando dependencias globales de npm (LSPs, formatters y herramientas de soporte)..."
+sudo npm install -g prettier \
+  eslint_d \
+  intelephense \
+  typescript-language-server \
+  @tailwindcss/language-server \
+  bash-language-server \
+  dockerfile-language-server-nodejs \
+  vscode-langservers-extracted \
+  pyright \
+  emmet-language-server \
+  live-server \
+  tree-sitter-cli \
+  typescript \
+  neovim
 
 setup_nvidia_api_key
 
 echo ""
 echo "  ¡Configuración del sistema completada!"
-echo "  Para finalizar, abre Neovim ejecutando 'nvim'."
+echo "  Todas las dependencias base (Go, Python, PHP, Rust, Clang) y paquetes NPM están listos."
+echo "  Para finalizar, abre Neovim ejecutando 'nvim' y deja que Mason y Lazy hagan el resto."
